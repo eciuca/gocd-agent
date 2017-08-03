@@ -4,10 +4,6 @@ FROM gocd/gocd-agent-ubuntu-16.04:v17.8.0
 # Install the python script required for "add-apt-repository"
 RUN apt-get update && apt-get install -y software-properties-common
 
-# Sets language to UTF8 : this works in pretty much all cases
-ENV LANG en_US.UTF-8
-RUN locale-gen $LANG
-
 # Setup the openjdk 8 repo
 RUN add-apt-repository ppa:openjdk-r/ppa
 
