@@ -1,4 +1,4 @@
-FROM gocd/gocd-agent
+FROM gocd/gocd-agent-ubuntu-16.04:v17.8.0
 
 #INSTALL JAVA 8
 # Install the python script required for "add-apt-repository"
