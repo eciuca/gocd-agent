@@ -27,3 +27,5 @@ ENV MAVEN_HOME /usr/share/maven
 # Add go user to the docker group
 RUN groupadd -g 999 docker \
     && usermod -aG docker go
+
+RUN echo "if [ -e /var/run/docker.sock ]; then sudo chown go:go /var/run/docker.sock; fi" >> /home/go/.bashrc
