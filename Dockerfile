@@ -31,7 +31,15 @@ RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubunt
 RUN apt-get update
 RUN apt-get install -y docker-ce=17.06.0~ce-0~ubuntu
 
+# Install AWS CLI (~/.aws/credentials and ~/.aws/config need 2 be mounted)
+ENV LC_ALL C
+
+RUN apt-get install -y python-pip python-dev build-essential \
+  && pip install --upgrade pip \
+  && pip install --upgrade virtualenv \
+  && pip install awscli --upgrade --user
+
 # Add go user to the docker group
 RUN usermod -aG docker go
 
-RUN echo "if [ -e /var/run/docker.sock ]; then sudo chown go:go /var/run/docker.sock; fi" >> /home/go/.bashrc
+COPY settings.xml /home/go/.m2/
