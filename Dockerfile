@@ -13,7 +13,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 RUN export JAVA_HOME
 
 #INSTALL MAVEN 3
-ENV MAVEN_VERSION 3.5.0
+ENV MAVEN_VERSION 3.5.2
 
 RUN mkdir -p /usr/share/maven \
   && curl -fsSL http://apache.osuosl.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz \
@@ -38,6 +38,9 @@ RUN apt-get install -y python-pip python-dev build-essential \
   && pip install --upgrade pip \
   && pip install --upgrade virtualenv \
   && pip install awscli --upgrade --user
+
+# Install Node and NPM
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && apt-get install -y nodejs
 
 # Add go user to the docker group
 RUN usermod -aG docker go
