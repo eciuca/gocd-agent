@@ -1,4 +1,4 @@
-FROM gocd/gocd-agent-ubuntu-16.04:v17.10.0
+FROM gocd/gocd-agent-ubuntu-16.04:v18.1.0
 
 #INSTALL JAVA 8
 # Install the python script required for "add-apt-repository"
@@ -24,12 +24,11 @@ ENV MAVEN_HOME /usr/share/maven
 
 # Install Docker CE
 RUN apt-get update
-RUN apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
-RUN apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+RUN apt-get install -y apt-transport-https ca-certificates software-properties-common
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 RUN apt-get update
-RUN apt-get install -y docker-ce=17.06.0~ce-0~ubuntu
+RUN apt-get install -y docker-ce=17.12.0~ce-0~ubuntu
 
 # Install AWS CLI (~/.aws/credentials and ~/.aws/config need 2 be mounted)
 ENV LC_ALL C
@@ -37,10 +36,10 @@ ENV LC_ALL C
 RUN apt-get install -y python-pip python-dev build-essential \
   && pip install --upgrade pip \
   && pip install --upgrade virtualenv \
-  && pip install awscli --upgrade --user
+  && pip install awscli --upgrade
 
 # Install Node and NPM
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y nodejs
 
 # Add go user to the docker group
 RUN usermod -aG docker go
