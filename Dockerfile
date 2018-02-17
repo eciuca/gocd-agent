@@ -46,6 +46,12 @@ RUN usermod -aG docker go
 
 COPY settings.xml /home/go/.m2/
 
+# Install Chrome
+RUN curl -fsSL -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add \
+  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+  && apt-get -y update \
+  && apt-get -y install google-chrome-stable
+
 # Install ChromeDriver
 RUN curl -fsSL http://chromedriver.storage.googleapis.com/$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip -o chromedriver_linux64.zip \
   && unzip chromedriver_linux64.zip && rm chromedriver_linux64.zip \
