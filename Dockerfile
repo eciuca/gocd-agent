@@ -45,3 +45,10 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y
 RUN usermod -aG docker go
 
 COPY settings.xml /home/go/.m2/
+
+# Install ChromeDriver
+RUN curl -fsSL http://chromedriver.storage.googleapis.com/$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip -o chromedriver_linux64.zip \
+  && unzip chromedriver_linux64.zip && rm chromedriver_linux64.zip \
+  && mv -f chromedriver /usr/local/bin/chromedriver \
+  && chown root:root /usr/local/bin/chromedriver \
+  && chmod 0755 /usr/local/bin/chromedriver
