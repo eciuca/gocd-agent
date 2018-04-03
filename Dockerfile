@@ -58,3 +58,6 @@ RUN curl -fsSL http://chromedriver.storage.googleapis.com/$(curl -sS chromedrive
   && mv -f chromedriver /usr/local/bin/chromedriver \
   && chown root:root /usr/local/bin/chromedriver \
   && chmod 0755 /usr/local/bin/chromedriver
+
+# Install Groovy
+RUN apt-get install -y groovy2
